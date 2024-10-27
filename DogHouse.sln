@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35222.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogHouseProject", "DogHouseProject\DogHouseProject.csproj", "{2961D334-3905-4513-BACC-F1166DF124D3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2961D334-3905-4513-BACC-F1166DF124D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2961D334-3905-4513-BACC-F1166DF124D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2961D334-3905-4513-BACC-F1166DF124D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2961D334-3905-4513-BACC-F1166DF124D3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {157D0884-2276-413E-B631-F2FCDB4687D1}
+	EndGlobalSection
+EndGlobal
