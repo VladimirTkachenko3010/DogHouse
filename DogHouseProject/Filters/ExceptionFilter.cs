@@ -7,9 +7,19 @@ namespace Api.Filters
     {
         public void OnException(ExceptionContext context)
         {
-            context.Result = new JsonResult(new { error = context.Exception.Message })
+            var statusCode = StatusCodes.Status500InternalServerError; // Default 500
+            var message = "An unexpected error occurred."; // General error
+
+            // If it is an argument error (eg invalid parameters or data)
+            if (context.Exception is ArgumentException)
             {
-                StatusCode = StatusCodes.Status500InternalServerError
+                statusCode = StatusCodes.Status400BadRequest;
+                message = context.Exception.Message;
+            }
+
+            context.Result = new JsonResult(new { error = message })
+            {
+                StatusCode = statusCode
             };
         }
     }

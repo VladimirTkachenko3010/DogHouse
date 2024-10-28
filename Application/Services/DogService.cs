@@ -33,6 +33,13 @@ namespace Application.Services
         {
             var query = _dogRepository.Query();
 
+            //Checking the correctness of the sorting parameters
+            var validAttributes = new[] { "Name", "Color", "TailLength", "Weight" };
+            if (!validAttributes.Contains(parameters.Attribute))
+            {
+                throw new ArgumentException("Invalid attribute for sorting.");
+            }
+
             if (parameters.Order.ToLower() == "desc")
                 query = query.OrderByDescending(d => EF.Property<object>(d, parameters.Attribute));
             else
@@ -62,6 +69,5 @@ namespace Application.Services
                 Weight = dto.Weight
             };
         }
-
     }
 }

@@ -16,7 +16,4 @@
         public static Result Failure(string error) => new Result(false, new List<string> { error });
         public static Result Success(int id) => new Result(true, id: id);
     }
-
-
-
 }

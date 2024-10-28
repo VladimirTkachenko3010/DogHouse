@@ -18,5 +18,4 @@ namespace Infrastructure.Data
                 .IsUnique();  // Unique index on the Name field
         }
     }
-
 }
