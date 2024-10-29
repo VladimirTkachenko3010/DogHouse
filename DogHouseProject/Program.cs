@@ -27,8 +27,6 @@ builder.Services.AddControllers(options =>
 {
     options.Filters.Add<ExceptionFilter>();
 });
-
-
 builder.Services.AddControllers()
     .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<DogCreateDtoValidator>());
 
@@ -50,43 +48,26 @@ app.UseExceptionHandler(errorApp =>
 {
     errorApp.Run(async context =>
     {
-        context.Response.StatusCode = StatusCodes.Status400BadRequest;
         context.Response.ContentType = "application/json";
-
         var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>();
+
         if (exceptionHandlerPathFeature?.Error is JsonException)
         {
-            // If this is a JSON syntax error, return an invalid format message.
+            context.Response.StatusCode = StatusCodes.Status400BadRequest;
             var errorResponse = new
             {
                 Errors = new[]
                 {
-                    new
-                    {
-                        Message = "Invalid JSON format. Please check your JSON syntax."
-                    }
+                    new { Message = "Invalid JSON format. Please check your JSON syntax." }
                 }
             };
-
-            var jsonResponse = JsonSerializer.Serialize(errorResponse);
-            await context.Response.WriteAsync(jsonResponse);
+            await context.Response.WriteAsync(JsonSerializer.Serialize(errorResponse));
         }
         else
         {
-            // General handler for other errors
-            var generalErrorResponse = new
-            {
-                Errors = new[]
-                {
-                    new
-                    {
-                        Message = "An unexpected error occurred."
-                    }
-                }
-            };
-
-            var jsonResponse = JsonSerializer.Serialize(generalErrorResponse);
-            await context.Response.WriteAsync(jsonResponse);
+            // Any other exception is passed to ExceptionFilter
+            context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+            await context.Response.WriteAsync("An unexpected error occurred.");
         }
     });
 });

@@ -48,5 +48,4 @@ namespace Api.Middlewares
             await _next(context); // We pass the request on if the syntax is correct
         }
     }
-
 }

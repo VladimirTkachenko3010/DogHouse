@@ -10,14 +10,14 @@ namespace Api.Filters
             var statusCode = StatusCodes.Status500InternalServerError; // Default 500
             var message = "An unexpected error occurred."; // General error
 
-            // If it is an argument error (eg invalid parameters or data)
             if (context.Exception is ArgumentException)
             {
                 statusCode = StatusCodes.Status400BadRequest;
                 message = context.Exception.Message;
             }
 
-            context.Result = new JsonResult(new { error = message })
+            // Return a strongly typed dictionary instead of an anonymous object
+            context.Result = new JsonResult(new Dictionary<string, string> { { "error", message } })
             {
                 StatusCode = statusCode
             };
